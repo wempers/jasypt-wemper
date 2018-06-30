@@ -26,13 +26,12 @@ import org.springframework.core.env.StandardEnvironment;
 @Configuration
 public class EncryptablePropertyResolverConfiguration {
 
+    public static final String RESOLVER_BEAN_NAME = "lazyEncryptablePropertyResolver";
     private static final String ENCRYPTOR_BEAN_PLACEHOLDER = "${jasypt.encryptor.bean:jasyptStringEncryptor}";
     private static final String DETECTOR_BEAN_PLACEHOLDER = "${jasypt.encryptor.property.detector-bean:encryptablePropertyDetector}";
     private static final String RESOLVER_BEAN_PLACEHOLDER = "${jasypt.encryptor.property.resolver-bean:encryptablePropertyResolver}";
-
     private static final String ENCRYPTOR_BEAN_NAME = "lazyJasyptStringEncryptor";
     private static final String DETECTOR_BEAN_NAME = "lazyEncryptablePropertyDetector";
-    public static final String RESOLVER_BEAN_NAME = "lazyEncryptablePropertyResolver";
 
     @Bean
     public EnvCopy envCopy(ConfigurableEnvironment environment) {
@@ -68,7 +67,7 @@ public class EncryptablePropertyResolverConfiguration {
         EnvCopy(ConfigurableEnvironment environment) {
             copy = new StandardEnvironment();
             environment.getPropertySources().forEach(ps -> {
-                PropertySource<?> original = ps instanceof EncryptablePropertySource ? ((EncryptablePropertySource)ps).getDelegate() : ps;
+                PropertySource<?> original = ps instanceof EncryptablePropertySource ? ((EncryptablePropertySource) ps).getDelegate() : ps;
                 copy.getPropertySources().addLast(original);
             });
         }

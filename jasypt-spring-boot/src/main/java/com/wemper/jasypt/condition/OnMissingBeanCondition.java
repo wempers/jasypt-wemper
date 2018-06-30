@@ -25,7 +25,7 @@ public class OnMissingBeanCondition extends SpringBootCondition implements Confi
     public ConditionOutcome getMatchOutcome(ConditionContext context, AnnotatedTypeMetadata metadata) {
         Map<String, Object> beanAttributes = metadata.getAnnotationAttributes(Bean.class.getName());
         String beanName = ((String[]) beanAttributes.get("name"))[0];
-        if(StringUtils.isEmpty(beanName)) {
+        if (StringUtils.isEmpty(beanName)) {
             throw new IllegalStateException("OnMissingBeanCondition can't detect bean name!");
         }
         boolean missingBean = !context.getBeanFactory().containsBean(context.getEnvironment().resolveRequiredPlaceholders(beanName));

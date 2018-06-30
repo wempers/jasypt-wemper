@@ -26,11 +26,11 @@ public class DefaultLazyPropertyResolver implements EncryptablePropertyResolver 
                         .filter(bf::containsBean)
                         .map(name -> (EncryptablePropertyResolver) bf.getBean(name))
                         .map(bean -> {
-                           // log.info("Found Custom Resolver Bean {} with name: {}", bean, customResolverBeanName);
+                            // log.info("Found Custom Resolver Bean {} with name: {}", bean, customResolverBeanName);
                             return bean;
                         })
                         .orElseGet(() -> {
-                          //  log.info("Property Resolver custom Bean not found with name '{}'. Initializing Default Property Resolver", customResolverBeanName);
+                            //  log.info("Property Resolver custom Bean not found with name '{}'. Initializing Default Property Resolver", customResolverBeanName);
                             return new DefaultPropertyResolver(encryptor, propertyDetector);
                         }));
     }

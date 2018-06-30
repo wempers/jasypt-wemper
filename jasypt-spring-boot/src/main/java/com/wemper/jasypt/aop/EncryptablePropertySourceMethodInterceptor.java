@@ -6,7 +6,7 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.core.env.PropertySource;
 
-public class EncryptablePropertySourceMethodInterceptor <T> implements MethodInterceptor, EncryptablePropertySource<T> {
+public class EncryptablePropertySourceMethodInterceptor<T> implements MethodInterceptor, EncryptablePropertySource<T> {
 
     private final EncryptablePropertyResolver resolver;
     private final PropertySource<T> delegate;
@@ -18,11 +18,11 @@ public class EncryptablePropertySourceMethodInterceptor <T> implements MethodInt
 
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
-        if(isGetDelegateCall(invocation)) {
+        if (isGetDelegateCall(invocation)) {
             return getDelegate();
         }
         Object returnValue = invocation.proceed();
-        if(isGetPropertyCall(invocation)) {
+        if (isGetPropertyCall(invocation)) {
             return getProperty(resolver, getPropertySource(invocation), getNameArgument(invocation));
         }
         return returnValue;

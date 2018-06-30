@@ -6,7 +6,6 @@ import com.wemper.jasypt.wrapper.EncryptableEnumerablePropertySourceWrapper;
 import com.wemper.jasypt.wrapper.EncryptableMapPropertySourceWrapper;
 import com.wemper.jasypt.wrapper.EncryptablePropertySourceWrapper;
 import org.springframework.aop.framework.ProxyFactory;
-import org.springframework.aop.support.AopUtils;
 import org.springframework.core.env.*;
 
 import java.util.stream.Stream;
@@ -91,7 +90,7 @@ public class EncryptablePropertySourceConverter {
     }
 
     /**
-     *  Some Spring Boot code actually casts property sources to this specific type so must be proxied.
+     * Some Spring Boot code actually casts property sources to this specific type so must be proxied.
      */
     private static boolean needsProxyAnyway(String className) {
         return Stream.of(

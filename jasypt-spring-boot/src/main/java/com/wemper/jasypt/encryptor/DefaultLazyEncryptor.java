@@ -29,17 +29,35 @@ public class DefaultLazyEncryptor implements StringEncryptor {
                         .filter(bf::containsBean)
                         .map(name -> (StringEncryptor) bf.getBean(name))
                         .map(bean -> {
-                           // log.info("Found Custom Encryptor Bean {} with name: {}", bean, customEncryptorBeanName);
+                            // log.info("Found Custom Encryptor Bean {} with name: {}", bean, customEncryptorBeanName);
                             return bean;
                         })
                         .orElseGet(() -> {
-                          //  log.info("String Encryptor custom Bean not found with name '{}'. Initializing Default String Encryptor", customEncryptorBeanName);
+                            //  log.info("String Encryptor custom Bean not found with name '{}'. Initializing Default String Encryptor", customEncryptorBeanName);
                             return createDefault(e);
                         }));
     }
 
     public DefaultLazyEncryptor(Environment e) {
         singleton = new Singleton<>(() -> createDefault(e));
+    }
+
+    private static String getProperty(Environment environment, String key, String defaultValue) {
+        if (!propertyExists(environment, key)) {
+            //  log.info("Encryptor config not found for property {}, using default value: {}", key, defaultValue);
+        }
+        return environment.getProperty(key, defaultValue);
+    }
+
+    private static boolean propertyExists(Environment environment, String key) {
+        return environment.getProperty(key) != null;
+    }
+
+    private static String getRequiredProperty(Environment environment, String key) {
+        if (!propertyExists(environment, key)) {
+            throw new IllegalStateException(String.format("Required Encryption configuration property missing: %s", key));
+        }
+        return environment.getProperty(key);
     }
 
     private StringEncryptor createDefault(Environment e) {
@@ -55,24 +73,6 @@ public class DefaultLazyEncryptor implements StringEncryptor {
         config.setStringOutputType(getProperty(e, "jasypt.encryptor.stringOutputType", "base64"));
         encryptor.setConfig(config);
         return encryptor;
-    }
-
-    private static String getProperty(Environment environment, String key, String defaultValue) {
-        if (!propertyExists(environment, key)) {
-          //  log.info("Encryptor config not found for property {}, using default value: {}", key, defaultValue);
-        }
-        return environment.getProperty(key, defaultValue);
-    }
-
-    private static boolean propertyExists(Environment environment, String key) {
-        return environment.getProperty(key) != null;
-    }
-
-    private static String getRequiredProperty(Environment environment, String key) {
-        if (!propertyExists(environment, key)) {
-            throw new IllegalStateException(String.format("Required Encryption configuration property missing: %s", key));
-        }
-        return environment.getProperty(key);
     }
 
     @Override

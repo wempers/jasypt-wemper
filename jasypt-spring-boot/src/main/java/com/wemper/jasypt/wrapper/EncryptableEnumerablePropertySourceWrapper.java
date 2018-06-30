@@ -14,7 +14,7 @@ import org.springframework.util.Assert;
  * @author wemper
  * @version $Id: EncryptableEnumerablePropertySourceWrapper.java,v 0.1 2018年06月29日 20:59 $Exp
  */
-public class EncryptableEnumerablePropertySourceWrapper <T> extends EnumerablePropertySource<T> implements EncryptablePropertySource<T> {
+public class EncryptableEnumerablePropertySourceWrapper<T> extends EnumerablePropertySource<T> implements EncryptablePropertySource<T> {
     private final EnumerablePropertySource<T> delegate;
     private final EncryptablePropertyResolver resolver;
 

@@ -67,7 +67,7 @@ public class EncryptablePropertySourceBeanFactoryPostProcessor implements BeanFa
         try {
             PropertySource ps = createPropertySource(encryptablePropertySource, env, resourceLoader, resolver, loaders);
             propertySources.addLast(ps);
-           // log.info("Created Encryptable Property Source '{}' from locations: {}", ps.getName(), Arrays.asList(encryptablePropertySource.getStringArray("value")));
+            // log.info("Created Encryptable Property Source '{}' from locations: {}", ps.getName(), Arrays.asList(encryptablePropertySource.getStringArray("value")));
         } catch (Exception e) {
             throw new ApplicationContextException("Exception Creating PropertySource", e);
         }
@@ -86,7 +86,7 @@ public class EncryptablePropertySourceBeanFactoryPostProcessor implements BeanFa
                 if (!ignoreResourceNotFound) {
                     throw new IllegalStateException(String.format("Encryptable Property Source '%s' from location: %s Not Found", name, resolvedLocation));
                 } else {
-                 //   log.info("Ignoring NOT FOUND Encryptable Property Source '{}' from locations: {}", name, resolvedLocation);
+                    //   log.info("Ignoring NOT FOUND Encryptable Property Source '{}' from locations: {}", name, resolvedLocation);
                 }
             } else {
                 String actualName = name + "#" + resolvedLocation;

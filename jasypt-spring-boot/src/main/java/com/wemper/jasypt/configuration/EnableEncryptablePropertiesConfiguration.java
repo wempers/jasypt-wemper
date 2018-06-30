@@ -29,6 +29,6 @@ public class EnableEncryptablePropertiesConfiguration implements ApplicationCont
 
     @Override
     public void initialize(ConfigurableApplicationContext applicationContext) {
-       // log.info("Bootstraping jasypt-string-boot auto configuration in context: {}", applicationContext.getId());
+        // log.info("Bootstraping jasypt-string-boot auto configuration in context: {}", applicationContext.getId());
     }
 }

@@ -18,7 +18,7 @@ import org.springframework.util.Assert;
  */
 public class DefaultPropertyResolver implements EncryptablePropertyResolver
 
-    {
+{
 
     private StringEncryptor encryptor;
     private EncryptablePropertyDetector detector;
