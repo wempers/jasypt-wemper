@@ -1,5 +1,5 @@
 /*
- * wemper Inc.  wemper soft.
+ * wemper.org
  * Copyright (c) 2017-2018. All Rights Reserved.
  */
 package com.wemper.jasypt.properties;
@@ -9,7 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 /**
- * @author wemper
+ * @author fygu
  * @version $Id: JasyptEncryptorConfigurationProperties.java,v 0.1 2018年06月29日 21:11 $Exp
  */
 @ConfigurationProperties(prefix = "jasypt.encryptor", ignoreUnknownFields = true)

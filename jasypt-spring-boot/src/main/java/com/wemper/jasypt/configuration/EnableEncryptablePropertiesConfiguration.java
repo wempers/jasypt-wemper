@@ -1,10 +1,11 @@
 /*
- * wemper Inc.  wemper soft.
+ * wemper.org
  * Copyright (c) 2017-2018. All Rights Reserved.
  */
 package com.wemper.jasypt.configuration;
 
 import com.wemper.jasypt.InterceptionMode;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;

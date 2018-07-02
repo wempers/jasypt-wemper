@@ -9,6 +9,7 @@ import com.wemper.jasypt.wrapper.EncryptableMapPropertySourceWrapper;
 import com.wemper.jasypt.wrapper.EncryptablePropertySourceWrapper;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.core.env.CommandLinePropertySource;

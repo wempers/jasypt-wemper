@@ -1,5 +1,5 @@
 /*
- * wemper Inc.  wemper soft.
+ * wemper.org
  * Copyright (c) 2017-2018. All Rights Reserved.
  */
 package com.wemper.jasypt.detector;
@@ -7,6 +7,7 @@ package com.wemper.jasypt.detector;
 import com.wemper.jasypt.EncryptablePropertyDetector;
 import com.wemper.jasypt.util.Singleton;
 import java.util.Optional;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.BeanFactory;
 
 /**

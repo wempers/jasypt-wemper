@@ -1,5 +1,5 @@
 /*
- * wemper Inc.  wemper soft.
+ * wemper.org
  * Copyright (c) 2017-2018. All Rights Reserved.
  */
 package com.wemper.jasypt.exception;

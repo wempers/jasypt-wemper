@@ -1,5 +1,5 @@
 /*
- * wemper Inc.  wemper soft.
+ * wemper.org
  * Copyright (c) 2017-2018. All Rights Reserved.
  */
 package com.wemper.jasypt.detector;
@@ -8,7 +8,7 @@ import com.wemper.jasypt.EncryptablePropertyDetector;
 import org.springframework.util.Assert;
 
 /**
- * @author wemper
+ * @author fygu
  * @version $Id: DefaultPropertyDetector.java,v 0.1 2018年06月29日 21:07 $Exp
  */
 public class DefaultPropertyDetector implements EncryptablePropertyDetector {

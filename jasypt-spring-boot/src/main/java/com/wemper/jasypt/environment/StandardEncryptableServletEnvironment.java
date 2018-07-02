@@ -1,5 +1,5 @@
 /*
- * wemper Inc.  wemper soft.
+ * wemper.org
  * Copyright (c) 2017-2018. All Rights Reserved.
  */
 package com.wemper.jasypt.environment;
@@ -19,7 +19,7 @@ import org.springframework.core.env.MutablePropertySources;
 import org.springframework.web.context.support.StandardServletEnvironment;
 
 /**
- * @author wemper
+ * @author fygu
  * @version $Id: StandardEncryptableServletEnvironment.java,v 0.1 2018年06月29日 21:16 $Exp
  */
 public class StandardEncryptableServletEnvironment extends StandardServletEnvironment implements ConfigurableEnvironment {

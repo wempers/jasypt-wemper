@@ -1,5 +1,5 @@
 /*
- * wemper Inc.  wemper soft.
+ * wemper.org
  * Copyright (c) 2017-2018. All Rights Reserved.
  */
 package com.wemper.jasypt.annotation;
@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 import org.springframework.context.annotation.Import;
 
 /**
- * @author wemper
+ * @author fygu
  * @version $Id: EncryptablePropertySources.java,v 0.1 2018年06月29日 22:36 $Exp
  */
 @Target(ElementType.TYPE)

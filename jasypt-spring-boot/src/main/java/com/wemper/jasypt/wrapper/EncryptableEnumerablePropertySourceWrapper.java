@@ -1,5 +1,5 @@
 /*
- * wemper Inc.  wemper soft.
+ * wemper.org
  * Copyright (c) 2017-2018. All Rights Reserved.
  */
 package com.wemper.jasypt.wrapper;
@@ -11,7 +11,7 @@ import org.springframework.core.env.PropertySource;
 import org.springframework.util.Assert;
 
 /**
- * @author wemper
+ * @author fygu
  * @version $Id: EncryptableEnumerablePropertySourceWrapper.java,v 0.1 2018年06月29日 20:59 $Exp
  */
 public class EncryptableEnumerablePropertySourceWrapper<T> extends EnumerablePropertySource<T> implements EncryptablePropertySource<T> {

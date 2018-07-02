@@ -1,5 +1,5 @@
 /*
- * wemper Inc.  wemper soft.
+ * wemper.org
  * Copyright (c) 2017-2018. All Rights Reserved.
  */
 package com.wemper.jasypt.configuration;
@@ -16,7 +16,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.env.Environment;
 
 /**
- * @author wemper
+ * @author fygu
  * @version $Id: BeanNamePlaceholderRegistryPostProcessor.java,v 0.1 2018年06月29日 22:39 $Exp
  */
 @Log4j2

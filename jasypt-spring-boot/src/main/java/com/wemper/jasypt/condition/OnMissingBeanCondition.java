@@ -1,5 +1,5 @@
 /*
- * wemper Inc.  wemper soft.
+ * wemper.org
  * Copyright (c) 2017-2018. All Rights Reserved.
  */
 package com.wemper.jasypt.condition;
@@ -14,7 +14,7 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 import org.springframework.util.StringUtils;
 
 /**
- * @author wemper
+ * @author fygu
  * @version $Id: OnMissingBeanCondition.java,v 0.1 2018年06月29日 21:09 $Exp
  */
 public class OnMissingBeanCondition extends SpringBootCondition implements ConfigurationCondition {

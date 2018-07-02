@@ -1,5 +1,5 @@
 /*
- * wemper Inc.  wemper soft.
+ * wemper.org
  * Copyright (c) 2017-2018. All Rights Reserved.
  */
 package com.wemper.jasypt.resolver;
@@ -13,7 +13,7 @@ import org.jasypt.exceptions.EncryptionOperationNotPossibleException;
 import org.springframework.util.Assert;
 
 /**
- * @author wemper
+ * @author fygu
  * @version $Id: DefaultPropertyResolver.java,v 0.1 2018年06月29日 21:06 $Exp
  */
 public class DefaultPropertyResolver implements EncryptablePropertyResolver

@@ -1,5 +1,5 @@
 /*
- * wemper Inc.  wemper soft.
+ * wemper.org
  * Copyright (c) 2017-2018. All Rights Reserved.
  */
 package com.wemper.jasypt.resolver;
@@ -8,11 +8,12 @@ import com.wemper.jasypt.EncryptablePropertyDetector;
 import com.wemper.jasypt.EncryptablePropertyResolver;
 import com.wemper.jasypt.util.Singleton;
 import java.util.Optional;
+import lombok.extern.log4j.Log4j2;
 import org.jasypt.encryption.StringEncryptor;
 import org.springframework.beans.factory.BeanFactory;
 
 /**
- * @author wemper
+ * @author fygu
  * @version $Id: DefaultLazyPropertyResolver.java,v 0.1 2018年06月29日 21:05 $Exp
  */
 @Log4j2

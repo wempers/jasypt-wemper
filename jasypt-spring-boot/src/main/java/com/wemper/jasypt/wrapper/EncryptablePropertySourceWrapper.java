@@ -1,5 +1,5 @@
 /*
- * wemper Inc.  wemper soft.
+ * wemper.org
  * Copyright (c) 2017-2018. All Rights Reserved.
  */
 package com.wemper.jasypt.wrapper;
@@ -10,13 +10,13 @@ import org.springframework.core.env.PropertySource;
 import org.springframework.util.Assert;
 
 /**
- * @author wemper
+ * @author fygu
  * @version $Id: EncryptablePropertySourceWrapper.java,v 0.1 2018年06月29日 21:02 $Exp
  */
 public class EncryptablePropertySourceWrapper<T> extends PropertySource<T> implements EncryptablePropertySource<T> {
 
   private final PropertySource<T> delegate;
-  EncryptablePropertyResolver resolver;
+  private EncryptablePropertyResolver resolver;
 
   public EncryptablePropertySourceWrapper(PropertySource<T> delegate, EncryptablePropertyResolver resolver) {
     super(delegate.getName(), delegate.getSource());

@@ -1,5 +1,5 @@
 /*
- * wemper Inc.  wemper soft.
+ * wemper.org
  * Copyright (c) 2017-2018. All Rights Reserved.
  */
 package com.wemper.jasypt.configuration;
@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 import lombok.SneakyThrows;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
@@ -37,7 +38,7 @@ import org.springframework.util.StringUtils;
 
 
 /**
- * @author wemper
+ * @author fygu
  * @version $Id: EncryptablePropertySourceBeanFactoryPostProcessor.java,v 0.1 2018年06月29日 22:29 $Exp
  */
 @Log4j2

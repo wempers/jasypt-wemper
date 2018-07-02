@@ -1,5 +1,5 @@
 /*
- * wemper Inc.  wemper soft.
+ * wemper.org
  * Copyright (c) 2017-2018. All Rights Reserved.
  */
 package com.wemper.jasypt.configuration;
@@ -21,7 +21,7 @@ import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MutablePropertySources;
 
 /**
- * @author wemper
+ * @author fygu
  * @version $Id: EnableEncryptablePropertiesBeanFactoryPostProcessor.java,v 0.1 2018年06月29日 22:26 $Exp
  */
 public class EnableEncryptablePropertiesBeanFactoryPostProcessor implements BeanFactoryPostProcessor, ApplicationListener<ApplicationEvent>, Ordered {

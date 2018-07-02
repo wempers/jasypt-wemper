@@ -1,5 +1,5 @@
 /*
- * wemper Inc.  wemper soft.
+ * wemper.org
  * Copyright (c) 2017-2018. All Rights Reserved.
  */
 package com.wemper.jasypt.configuration;
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.core.env.ConfigurableEnvironment;
 
 /**
- * @author wemper
+ * @author fygu
  * @version $Id: EncryptablePropertySourceConfiguration.java,v 0.1 2018年06月29日 22:29 $Exp
  */
 @Configuration

@@ -1,11 +1,12 @@
 /*
- * wemper Inc.  wemper soft.
+ * wemper.org
  * Copyright (c) 2017-2018. All Rights Reserved.
  */
 package com.wemper.jasypt.encryptor;
 
 import com.wemper.jasypt.util.Singleton;
 import java.util.Optional;
+import lombok.extern.log4j.Log4j2;
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
@@ -13,7 +14,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.core.env.Environment;
 
 /**
- * @author wemper
+ * @author fygu
  * @version $Id: DefaultLazyEncryptor.java,v 0.1 2018年06月29日 21:17 $Exp
  */
 @Log4j2
