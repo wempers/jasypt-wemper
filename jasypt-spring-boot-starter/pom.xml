@@ -3,8 +3,8 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>com.wemper.jasypt</artifactId>
-    <groupId>jasypt-spring-boot-parent</groupId>
+    <artifactId>jasypt-spring-boot-parent</artifactId>
+    <groupId>com.wemper.jasypt</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
@@ -29,7 +29,7 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>jasypt-spring-boot-parent</groupId>
+      <groupId>com.wemper.jasypt</groupId>
       <artifactId>jasypt-spring-boot</artifactId>
       <version>1.0-SNAPSHOT</version>
       <scope>compile</scope>
