@@ -5,12 +5,11 @@
 package com.wemper.jasypt.annotation;
 
 import com.wemper.jasypt.configuration.EncryptablePropertySourceConfiguration;
-import org.springframework.context.annotation.Import;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import org.springframework.context.annotation.Import;
 
 /**
  * @author wemper
@@ -20,5 +19,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Import(EncryptablePropertySourceConfiguration.class)
 public @interface EncryptablePropertySources {
-    EncryptablePropertySource[] value();
+
+  EncryptablePropertySource[] value();
 }

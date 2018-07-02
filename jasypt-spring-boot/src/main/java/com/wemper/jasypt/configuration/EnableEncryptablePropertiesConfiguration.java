@@ -16,19 +16,20 @@ import org.springframework.core.env.ConfigurableEnvironment;
  * @author fygu
  * @version $Id: EnableEncryptablePropertiesConfiguration.java,v1.0 2018年06月28日 17:33 $Exp
  */
+@Log4j2
 @Configuration
 @Import(EncryptablePropertyResolverConfiguration.class)
 public class EnableEncryptablePropertiesConfiguration implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
-    @Bean
-    public static EnableEncryptablePropertiesBeanFactoryPostProcessor enableEncryptablePropertySourcesPostProcessor(ConfigurableEnvironment environment) {
-        boolean proxyPropertySources = environment.getProperty("jasypt.encryptor.proxyPropertySources", Boolean.TYPE, false);
-        InterceptionMode interceptionMode = proxyPropertySources ? InterceptionMode.PROXY : InterceptionMode.WRAPPER;
-        return new EnableEncryptablePropertiesBeanFactoryPostProcessor(environment, interceptionMode);
-    }
+  @Bean
+  public static EnableEncryptablePropertiesBeanFactoryPostProcessor enableEncryptablePropertySourcesPostProcessor(ConfigurableEnvironment environment) {
+    boolean proxyPropertySources = environment.getProperty("jasypt.encryptor.proxyPropertySources", Boolean.TYPE, false);
+    InterceptionMode interceptionMode = proxyPropertySources ? InterceptionMode.PROXY : InterceptionMode.WRAPPER;
+    return new EnableEncryptablePropertiesBeanFactoryPostProcessor(environment, interceptionMode);
+  }
 
-    @Override
-    public void initialize(ConfigurableApplicationContext applicationContext) {
-        // log.info("Bootstraping jasypt-string-boot auto configuration in context: {}", applicationContext.getId());
-    }
+  @Override
+  public void initialize(ConfigurableApplicationContext applicationContext) {
+    log.info("Bootstraping jasypt-string-boot auto configuration in context: {}", applicationContext.getId());
+  }
 }

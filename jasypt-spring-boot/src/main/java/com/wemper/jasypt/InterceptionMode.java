@@ -10,6 +10,6 @@ package com.wemper.jasypt;
  */
 public enum InterceptionMode {
 
-    WRAPPER,
-    PROXY
+  WRAPPER,
+  PROXY
 }

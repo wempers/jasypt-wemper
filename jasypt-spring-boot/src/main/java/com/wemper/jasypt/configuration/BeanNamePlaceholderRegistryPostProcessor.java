@@ -4,7 +4,8 @@
  */
 package com.wemper.jasypt.configuration;
 
-import lombok.extern.slf4j.Slf4j;
+import java.util.stream.Stream;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -14,44 +15,42 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.core.Ordered;
 import org.springframework.core.env.Environment;
 
-import java.util.stream.Stream;
-
 /**
  * @author wemper
  * @version $Id: BeanNamePlaceholderRegistryPostProcessor.java,v 0.1 2018年06月29日 22:39 $Exp
  */
-@Slf4j
+@Log4j2
 public class BeanNamePlaceholderRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor, Ordered {
 
-    private Environment environment;
+  private Environment environment;
 
-    BeanNamePlaceholderRegistryPostProcessor(Environment environment) {
-        this.environment = environment;
-    }
+  BeanNamePlaceholderRegistryPostProcessor(Environment environment) {
+    this.environment = environment;
+  }
 
-    @Override
-    public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
-        DefaultListableBeanFactory bf = (DefaultListableBeanFactory) registry;
-        Stream.of(bf.getBeanDefinitionNames())
-                //Look for beans with placeholders name format: '${placeholder}' or '${placeholder:defaultValue}'
-                .filter(name -> name.matches("\\$\\{[\\w.-]+(?>:[\\w.-]+)?\\}"))
-                .forEach(placeholder -> {
-                    String actualName = environment.resolveRequiredPlaceholders(placeholder);
-                    BeanDefinition bd = bf.getBeanDefinition(placeholder);
-                    bf.removeBeanDefinition(placeholder);
-                    bf.registerBeanDefinition(actualName, bd);
-                    log.debug("Registering new name '{}' for Bean definition with placeholder name: {}", actualName, placeholder);
-                });
-    }
+  @Override
+  public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
+    DefaultListableBeanFactory bf = (DefaultListableBeanFactory) registry;
+    Stream.of(bf.getBeanDefinitionNames())
+        //Look for beans with placeholders name format: '${placeholder}' or '${placeholder:defaultValue}'
+        .filter(name -> name.matches("\\$\\{[\\w.-]+(?>:[\\w.-]+)?\\}"))
+        .forEach(placeholder -> {
+          String actualName = environment.resolveRequiredPlaceholders(placeholder);
+          BeanDefinition bd = bf.getBeanDefinition(placeholder);
+          bf.removeBeanDefinition(placeholder);
+          bf.registerBeanDefinition(actualName, bd);
+          log.debug("Registering new name '{}' for Bean definition with placeholder name: {}", actualName, placeholder);
+        });
+  }
 
-    @Override
-    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+  @Override
+  public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 
-    }
+  }
 
-    @Override
-    public int getOrder() {
-        return Ordered.LOWEST_PRECEDENCE - 1;
-    }
+  @Override
+  public int getOrder() {
+    return Ordered.LOWEST_PRECEDENCE - 1;
+  }
 }
 

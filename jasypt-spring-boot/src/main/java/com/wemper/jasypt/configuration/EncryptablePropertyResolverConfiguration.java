@@ -26,56 +26,58 @@ import org.springframework.core.env.StandardEnvironment;
 @Configuration
 public class EncryptablePropertyResolverConfiguration {
 
-    public static final String RESOLVER_BEAN_NAME = "lazyEncryptablePropertyResolver";
-    private static final String ENCRYPTOR_BEAN_PLACEHOLDER = "${jasypt.encryptor.bean:jasyptStringEncryptor}";
-    private static final String DETECTOR_BEAN_PLACEHOLDER = "${jasypt.encryptor.property.detector-bean:encryptablePropertyDetector}";
-    private static final String RESOLVER_BEAN_PLACEHOLDER = "${jasypt.encryptor.property.resolver-bean:encryptablePropertyResolver}";
-    private static final String ENCRYPTOR_BEAN_NAME = "lazyJasyptStringEncryptor";
-    private static final String DETECTOR_BEAN_NAME = "lazyEncryptablePropertyDetector";
+  public static final String RESOLVER_BEAN_NAME = "lazyEncryptablePropertyResolver";
+  private static final String ENCRYPTOR_BEAN_PLACEHOLDER = "${jasypt.encryptor.bean:jasyptStringEncryptor}";
+  private static final String DETECTOR_BEAN_PLACEHOLDER = "${jasypt.encryptor.property.detector-bean:encryptablePropertyDetector}";
+  private static final String RESOLVER_BEAN_PLACEHOLDER = "${jasypt.encryptor.property.resolver-bean:encryptablePropertyResolver}";
+  private static final String ENCRYPTOR_BEAN_NAME = "lazyJasyptStringEncryptor";
+  private static final String DETECTOR_BEAN_NAME = "lazyEncryptablePropertyDetector";
 
-    @Bean
-    public EnvCopy envCopy(ConfigurableEnvironment environment) {
-        return new EnvCopy(environment);
+  @Bean
+  public EnvCopy envCopy(ConfigurableEnvironment environment) {
+    return new EnvCopy(environment);
+  }
+
+  @Bean(name = ENCRYPTOR_BEAN_NAME)
+  public StringEncryptor stringEncryptor(@SuppressWarnings("SpringJavaAutowiringInspection") EnvCopy envCopy, BeanFactory bf) {
+    String customEncryptorBeanName = envCopy.get().resolveRequiredPlaceholders(ENCRYPTOR_BEAN_PLACEHOLDER);
+    return new DefaultLazyEncryptor(envCopy.get(), customEncryptorBeanName, bf);
+  }
+
+  @Bean(name = DETECTOR_BEAN_NAME)
+  public EncryptablePropertyDetector encryptablePropertyDetector(@SuppressWarnings("SpringJavaAutowiringInspection") EnvCopy envCopy, BeanFactory bf) {
+    String prefix = envCopy.get().resolveRequiredPlaceholders("${jasypt.encryptor.property.prefix:ENC(}");
+    String suffix = envCopy.get().resolveRequiredPlaceholders("${jasypt.encryptor.property.suffix:)}");
+    String customDetectorBeanName = envCopy.get().resolveRequiredPlaceholders(DETECTOR_BEAN_PLACEHOLDER);
+    return new DefaultLazyPropertyDetector(prefix, suffix, customDetectorBeanName, bf);
+  }
+
+  @Bean(name = RESOLVER_BEAN_NAME)
+  public EncryptablePropertyResolver encryptablePropertyResolver(@Qualifier(DETECTOR_BEAN_NAME) EncryptablePropertyDetector propertyDetector, @Qualifier(ENCRYPTOR_BEAN_NAME) StringEncryptor encryptor, BeanFactory bf,
+      @SuppressWarnings("SpringJavaAutowiringInspection") EnvCopy envCopy) {
+    String customResolverBeanName = envCopy.get().resolveRequiredPlaceholders(RESOLVER_BEAN_PLACEHOLDER);
+    return new DefaultLazyPropertyResolver(propertyDetector, encryptor, customResolverBeanName, bf);
+  }
+
+  /**
+   * Need a copy of the environment without the Enhanced property sources to avoid circular dependencies.
+   */
+  private static class EnvCopy {
+
+    StandardEnvironment copy;
+
+    EnvCopy(ConfigurableEnvironment environment) {
+      copy = new StandardEnvironment();
+      environment.getPropertySources().forEach(ps -> {
+        PropertySource<?> original = ps instanceof EncryptablePropertySource ? ((EncryptablePropertySource) ps).getDelegate() : ps;
+        copy.getPropertySources().addLast(original);
+      });
     }
 
-    @Bean(name = ENCRYPTOR_BEAN_NAME)
-    public StringEncryptor stringEncryptor(@SuppressWarnings("SpringJavaAutowiringInspection") EnvCopy envCopy, BeanFactory bf) {
-        String customEncryptorBeanName = envCopy.get().resolveRequiredPlaceholders(ENCRYPTOR_BEAN_PLACEHOLDER);
-        return new DefaultLazyEncryptor(envCopy.get(), customEncryptorBeanName, bf);
+    ConfigurableEnvironment get() {
+      return copy;
     }
-
-    @Bean(name = DETECTOR_BEAN_NAME)
-    public EncryptablePropertyDetector encryptablePropertyDetector(@SuppressWarnings("SpringJavaAutowiringInspection") EnvCopy envCopy, BeanFactory bf) {
-        String prefix = envCopy.get().resolveRequiredPlaceholders("${jasypt.encryptor.property.prefix:ENC(}");
-        String suffix = envCopy.get().resolveRequiredPlaceholders("${jasypt.encryptor.property.suffix:)}");
-        String customDetectorBeanName = envCopy.get().resolveRequiredPlaceholders(DETECTOR_BEAN_PLACEHOLDER);
-        return new DefaultLazyPropertyDetector(prefix, suffix, customDetectorBeanName, bf);
-    }
-
-    @Bean(name = RESOLVER_BEAN_NAME)
-    public EncryptablePropertyResolver encryptablePropertyResolver(@Qualifier(DETECTOR_BEAN_NAME) EncryptablePropertyDetector propertyDetector, @Qualifier(ENCRYPTOR_BEAN_NAME) StringEncryptor encryptor, BeanFactory bf, @SuppressWarnings("SpringJavaAutowiringInspection") EnvCopy envCopy) {
-        String customResolverBeanName = envCopy.get().resolveRequiredPlaceholders(RESOLVER_BEAN_PLACEHOLDER);
-        return new DefaultLazyPropertyResolver(propertyDetector, encryptor, customResolverBeanName, bf);
-    }
-
-    /**
-     * Need a copy of the environment without the Enhanced property sources to avoid circular dependencies.
-     */
-    private static class EnvCopy {
-        StandardEnvironment copy;
-
-        EnvCopy(ConfigurableEnvironment environment) {
-            copy = new StandardEnvironment();
-            environment.getPropertySources().forEach(ps -> {
-                PropertySource<?> original = ps instanceof EncryptablePropertySource ? ((EncryptablePropertySource) ps).getDelegate() : ps;
-                copy.getPropertySources().addLast(original);
-            });
-        }
-
-        ConfigurableEnvironment get() {
-            return copy;
-        }
-    }
+  }
 
 
 }

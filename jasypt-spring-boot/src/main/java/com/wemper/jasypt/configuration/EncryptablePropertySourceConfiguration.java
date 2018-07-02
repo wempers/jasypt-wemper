@@ -17,9 +17,9 @@ import org.springframework.core.env.ConfigurableEnvironment;
 @Import(EncryptablePropertyResolverConfiguration.class)
 public class EncryptablePropertySourceConfiguration {
 
-    @Bean
-    public static EncryptablePropertySourceBeanFactoryPostProcessor encryptablePropertySourceAnnotationPostProcessor(ConfigurableEnvironment env) {
-        return new EncryptablePropertySourceBeanFactoryPostProcessor(env);
-    }
+  @Bean
+  public static EncryptablePropertySourceBeanFactoryPostProcessor encryptablePropertySourceAnnotationPostProcessor(ConfigurableEnvironment env) {
+    return new EncryptablePropertySourceBeanFactoryPostProcessor(env);
+  }
 
 }
